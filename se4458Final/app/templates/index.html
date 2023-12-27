@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <div class="content-wrapper">
-        <button>Sisteme Giriş Yap</button>
-        <button>Kan Talebinde Bulun</button>
+        <div class="content">
+            <a href="/request">Kan Talebinde Bulun</a>
+            <a href="/login">Sisteme Giriş Yap</a>
+        </div>   
     </div>
     
 </body>
