@@ -10,6 +10,7 @@
     <div class="content-wrapper">
         <div class="content">
             <h2>Add Blood to Bank</h2>
+            <h2>{{ branch_name }}</h2>
             <form method="post" action="{{ url_for('addBlood') }}">
                 <label for="bloodGroup">Blood Group:</label>
                 <input type="text" id="bloodGroup" name="bloodGroup" required><br>
