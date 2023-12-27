@@ -4,8 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Donor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/createDonorForm.css') }}">
 </head>
 <body>
-    
+    <div class="content-wrapper">
+        <div class="content">
+            <h2>Create Donor</h2>
+            <form method="post" action="{{ url_for('createDonor') }}">
+                <label for="donorName">Donor Name:</label>
+                <input type="text" id="donorName" name="donorName" required><br>
+        
+                <label for="bloodGroup">Blood Group:</label>
+                <input type="text" id="bloodGroup" name="bloodGroup" required><br>
+        
+                <label for="rhd">RHD:</label>
+                <input type="text" id="rhd" name="rhd" required><br>
+        
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city" required><br>
+        
+                <label for="town">Town:</label>
+                <input type="text" id="town" name="town" required><br>
+        
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" required><br>
+        
+                <input type="submit" value="Create Donor" id="submit">
+            </form>
+        </div>
+    </div>
 </body>
 </html>
