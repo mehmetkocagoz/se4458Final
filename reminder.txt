@@ -1,0 +1,3 @@
+Example Username and Passwords:
+1 - 'Konak Branch' , 'Konak35'
+2 - 'Buca Branch' , 'Buca35
