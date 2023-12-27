@@ -11,7 +11,7 @@ def home():
 
 @app.route("/login", methods = ['GET','POST'])
 def login():
-    # If request method is POST, it comes froms the form
+    # If request method is POST, it comes froms the form, check database and validate user
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -21,20 +21,29 @@ def login():
             session['username'] = username
             
             return redirect(url_for('userOpt'))
+        else:
+            return render_template("login.html")
+    # else it is a GET request and we will render login page
     else:
         return render_template("login.html")
 
-@app.route("/add")
+@app.route("/add",methods = ['GET','POST'])
 def addBlood():
-    if 'logged_in' in session and session['logged_in']:
-        return render_template("addblood.html")
+    if request.method == 'GET':
+        if 'logged_in' in session and session['logged_in']:
+            branch_name = session['username']
+            return render_template("addblood.html",branch_name = branch_name)
+        else:
+            return redirect(url_for('login'))
+    # Else if method is POST, it means form submitted and we will handle form operations
     else:
-        return redirect(url_for('login'))
+        return "a"
 
 @app.route("/create")
 def createDonor():
     if 'logged_in' in session and session['logged_in']:
-        return render_template("createdonor.html")
+        branch_name = session['username']
+        return render_template("createdonor.html",branch_name = branch_name)
     else:
         return redirect(url_for('login'))
 
