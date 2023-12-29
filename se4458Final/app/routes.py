@@ -22,7 +22,8 @@ def login():
             
             return redirect(url_for('userOpt'))
         else:
-            return render_template("login.html")
+            error = 'Wrong username or password'
+            return render_template("login.html",error=error)
     # else it is a GET request and we will render login page
     else:
         return render_template("login.html")
