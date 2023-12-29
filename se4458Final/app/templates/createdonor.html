@@ -10,6 +10,7 @@
     <div class="content-wrapper">
         <div class="content">
             <h2>Create Donor</h2>
+            <h2>{{ branch_name }}</h2>
             <form method="post" action="{{ url_for('createDonor') }}">
                 <label for="donorName">Donor Name:</label>
                 <input type="text" id="donorName" name="donorName" required><br>
