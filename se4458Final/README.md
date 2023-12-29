@@ -15,3 +15,7 @@ Blood Donation System is a web application built with Flask to manage blood dona
 - **templates:** HTML templates for the web pages.
 - **static:** Static files (CSS, images, etc.).
 - **app.py:** The main Flask application file.
+
+## Assumptions
+
+- Blood Type will be seperated Blood Group (A,B,0,AB) and RhD(+,-)
