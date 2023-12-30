@@ -17,3 +17,5 @@ Blood Donation System is a web application built with Flask to manage blood dona
 - **app.py:** The main Flask application file.
 
 ## Assumptions
+
+- Assuming when adding blood to bank, there is already a donor created in Donors table
