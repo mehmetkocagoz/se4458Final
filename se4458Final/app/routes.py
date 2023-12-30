@@ -1,7 +1,7 @@
 from flask import render_template,request,session,redirect,url_for
 from app import app
 from app.validation import checkUser
-from app.blooddb import addBloodToDatabase,createDonorInDatabase
+from app.blooddb import addBloodToDatabase,createDonorInDatabase,requestBloodFromDatabase
 
 
 app.secret_key = 'random_string'
@@ -73,6 +73,18 @@ def userOpt():
     return render_template("loggedFrame.html")
 
 
-@app.route("/request")
+@app.route("/request",methods = ['GET','POST'])
 def requestBlood():
-    return render_template("requestblood.html")
+    if request.method == 'GET':
+        return render_template("requestblood.html")
+    else:
+        requestor = request.form['requestor']
+        blood_type = request.form['bloodType']
+        city = request.form['city']
+        town = request.form['town']
+        email = request.form['email']
+        units = int(request.form['units'])
+        duration = request.form['duration']
+        reason = request.form['reason']
+        donor_list = requestBloodFromDatabase(requestor,blood_type,city,town,email,units,duration)
+        return render_template("requestblood.html",donors= donor_list)
