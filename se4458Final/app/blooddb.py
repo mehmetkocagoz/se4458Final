@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 import os
 import pyodbc
 from app.queueservice import addMessagetoQueue
+from app.mailsender import sendEmailToRequestor
 import json
 
 load_dotenv()
@@ -22,7 +23,6 @@ def conn():
 
     except pyodbc.Error as ex:
         sqlstate = ex.args[1]
-        print(sqlstate)
         return f"Error connecting to the database. SQLState: {sqlstate}"
     
 def addBloodToDatabase(donor_name,blood_type,unit):
@@ -113,4 +113,8 @@ def requestBloodFromDatabase(requestor, blood_type, city, town, email, units, du
             
     connection.commit()
     connection.close()
+    message = """
+        Blood Found donors:
+    """
+    sendEmailToRequestor(email,message)
     return donor_name_list
