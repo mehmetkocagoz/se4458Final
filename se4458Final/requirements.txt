@@ -5,4 +5,5 @@ fastapi
 uvicorn[standard]
 pydantic
 azure-identity
+azure-storage-queue
 python-dotenv==0.19.1
