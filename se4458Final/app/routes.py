@@ -1,6 +1,7 @@
 from flask import render_template,request,session,redirect,url_for
 from app import app
 from app.validation import checkUser
+from app.blooddb import addBloodToDatabase,createDonorInDatabase
 
 
 app.secret_key = 'random_string'
@@ -30,23 +31,42 @@ def login():
 
 @app.route("/add",methods = ['GET','POST'])
 def addBlood():
+    branch_name = session['username']
     if request.method == 'GET':
         if 'logged_in' in session and session['logged_in']:
-            branch_name = session['username']
+            
             return render_template("addblood.html",branch_name = branch_name)
         else:
             return redirect(url_for('login'))
     # Else if method is POST, it means form submitted and we will handle form operations
     else:
-        return "a"
+        blood_type = request.form['bloodType']
+        unit = int(request.form['unit'])
+        donor_name = request.form['donorName']
+        print(blood_type)
+        messageFromDatabase = addBloodToDatabase(donor_name,blood_type,unit)
+        return render_template("addblood.html",branch_name = branch_name,message = messageFromDatabase)
 
-@app.route("/create")
+@app.route("/create",methods = ['GET','POST'])
 def createDonor():
-    if 'logged_in' in session and session['logged_in']:
-        branch_name = session['username']
-        return render_template("createdonor.html",branch_name = branch_name)
+    branch_name = session['username']
+    if request.method == 'GET':
+        if 'logged_in' in session and session['logged_in']:
+            
+            return render_template("createdonor.html",branch_name = branch_name)
+        else:
+            return redirect(url_for('login'))
     else:
-        return redirect(url_for('login'))
+        donor_name = request.form['donorName']
+        blood_type = request.form['bloodType']
+        city = request.form['city']
+        town = request.form['town']
+        email = request.form['email']
+        phone = request.form['phone']
+        
+        messageFromDB = createDonorInDatabase(donor_name,blood_type,city,town,email,phone)
+        return render_template("createdonor.html",branch_name = branch_name,message = messageFromDB)
+
 
 @app.route("/userLogged")
 def userOpt():
