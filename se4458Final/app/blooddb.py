@@ -1,6 +1,8 @@
 from dotenv import load_dotenv
 import os
 import pyodbc
+from app.queueservice import addMessagetoQueue
+import json
 
 load_dotenv()
 
@@ -96,6 +98,17 @@ def requestBloodFromDatabase(requestor, blood_type, city, town, email, units, du
         connection.commit()
     # Else there is no enough blood, we will send a message to queue, queue will handled with another service
     else:
+        request_data = {
+        'requestor': requestor,
+        'blood_type': blood_type,
+        'city': city,
+        'town': town,
+        'email': email,
+        'units': units,
+        'duration': duration
+    }
+        json_request = json.dumps(request_data)
+        addMessagetoQueue(json_request)
         return "Not enough blood, it sends to queue"
             
     connection.commit()
