@@ -22,20 +22,7 @@ def connect():
 def addMessagetoQueue(jsonFormatMessage):
     queue_client = connect()
 
-    # Peek at the next message in the queue without removing it
-    messages = queue_client.peek_messages()
-    for message in messages:
-        decoded_content = base64.b64decode(message.content)
-        print(f"Peeked message: {decoded_content}")
-
-    # Receive and delete the next message from the queue
-    messages = queue_client.receive_messages()
-    for message in messages:
-        print(f"Received message: {message.content}")
-
-    # You can process the message content here
-
-    # After processing, delete the message from the queue
-    #queue_client.delete_message(message.id, message.pop_receipt)
-
-addMessagetoQueue()
+    # Encode the message content (assuming it's a string)
+    encoded_message = base64.b64encode(jsonFormatMessage.encode()).decode('utf-8')
+    queue_client.send_message(encoded_message)
+    
