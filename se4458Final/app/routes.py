@@ -43,7 +43,6 @@ def addBlood():
         blood_type = request.form['bloodType']
         unit = int(request.form['unit'])
         donor_name = request.form['donorName']
-        print(blood_type)
         messageFromDatabase = addBloodToDatabase(donor_name,blood_type,unit)
         return render_template("addblood.html",branch_name = branch_name,message = messageFromDatabase)
 
