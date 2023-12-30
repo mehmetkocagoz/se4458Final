@@ -10,6 +10,7 @@
     <div class="content-wrapper">
         <div class="content">
             <h2>Request Blood</h2>
+            <h2>{{ donors }}</h2>
             <form method="post" action="{{ url_for('requestBlood') }}">
                 <label for="requestor">Requestor:</label>
                 <input type="text" id="requestor" name="requestor" required><br>
